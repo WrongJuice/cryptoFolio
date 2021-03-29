@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">myWallet</string>
+    <string name="public_key">Public key</string>
+    <string name="private_key">Private key</string>
+    <string name="connect">Connect</string>
+    <string name="wallet">Wallet :</string>
+    <string name="_0">0</string>
+    <string name="appwidget_text">EXAMPLE</string>
+    <string name="add_widget">Add widget</string>
+    <string name="random_value">123 768.63</string>
+    <string name="dollar">$</string>
+</resources>
