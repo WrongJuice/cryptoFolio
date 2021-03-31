@@ -8,14 +8,18 @@ import android.widget.RemoteViews;
 /**
  * Implementation of App Widget functionality.
  */
-public class walletValue extends AppWidgetProvider {
+public class WalletBalanceWidget extends AppWidgetProvider {
+
+    private static Double walletBalanceValue;
 
     static void updateAppWidget(Context context, AppWidgetManager appWidgetManager,
                                 int appWidgetId) {
 
         // Construct the RemoteViews object
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.wallet_value);
-        //views.setTextViewText(R.id.appwidget_text, String.valueOf(firstWallet.getWalletAmount()));
+
+        if (walletBalanceValue != null)
+        views.setTextViewText(R.id.appwidget_text, String.valueOf(walletBalanceValue));
 
         // Instruct the widget manager to update the widget
         appWidgetManager.updateAppWidget(appWidgetId, views);
@@ -37,5 +41,9 @@ public class walletValue extends AppWidgetProvider {
     @Override
     public void onDisabled(Context context) {
         // Enter relevant functionality for when the last widget is disabled
+    }
+
+    public static void setWalletBalanceValue(double value) {
+        walletBalanceValue = value;
     }
 }

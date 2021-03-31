@@ -1,11 +1,11 @@
 package com.example.mywallet;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.concurrent.ExecutionException;
 
@@ -19,8 +19,6 @@ public class MainActivity extends AppCompatActivity {
 
         TextView wallet = findViewById(R.id.wallet);
         Button connect = findViewById(R.id.connect);
-
-
 
         EditText publicKey = findViewById(R.id.public_key);
         EditText privateKey = findViewById(R.id.private_key);
@@ -37,5 +35,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        // api key : 0HJvpJwNLRN41SSQJIaCYpsZ4UUryR3h7XfolarHu4vCFykTPKsoNLY2IC6F0Q1e
+        // api secretkey : DqvVFLcFh4ltUd4MN7WNQdoMTrEjzovQVjeqS0MyVGb4vasOQP7IMdlH2KP80RK5
     }
 }
