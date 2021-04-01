@@ -14,7 +14,7 @@ import java.util.concurrent.TimeoutException;
 
 public class RetrieveWallet extends AsyncTask<String, String, Double> {
 
-    double spotBalance;
+    private double spotBalance;
 
     public RetrieveWallet () {
         spotBalance = 0;
@@ -31,7 +31,6 @@ public class RetrieveWallet extends AsyncTask<String, String, Double> {
         SymbolInfo symbolInfoBTC = new SymbolInfo();
 
         //System.out.println("prices="+client.getAllPrices());
-
 
         for (AssetBalance balance : client.getAccount().getBalances()) {
             if (balance.getAsset().equals("USDT")) {
@@ -61,8 +60,9 @@ public class RetrieveWallet extends AsyncTask<String, String, Double> {
                 startAssets.add(balance.getAsset());
             }
         }
+        NomicsService.getPrices(startAssets, params[2]);
 
-        System.out.println("pricesRequestResult"+NomicsService.getPrices(startAssets, "EUR"));
+        System.out.println("pricesRequestResult");
 
         walletValue /= Double.parseDouble(client.get24HrPriceStatistics(params[2] + "USDT").getLastPrice());
 
@@ -75,4 +75,5 @@ public class RetrieveWallet extends AsyncTask<String, String, Double> {
     protected void onPostExecute(Double balance) {
         spotBalance = balance;
     }
+
 }

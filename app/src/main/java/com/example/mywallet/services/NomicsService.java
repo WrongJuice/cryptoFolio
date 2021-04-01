@@ -9,6 +9,7 @@ import com.android.volley.Response;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.mywallet.R;
+import com.example.mywallet.utils.RequestLauncher;
 import com.example.mywallet.utils.WaitRequestResult;
 
 import org.json.JSONArray;
@@ -22,6 +23,8 @@ public class NomicsService {
     private static final String NOMIC_URL = "https://api.nomics.com/v1/";
     private static final String NOMIC_API_KEY = ApplicationService.getAppContext().getString(R.string.nomic_api_key);
     private static final Object requestFinished = new Object();
+    private static boolean hasHadResponseDelivered;
+    private static final Object obj = new Object();
 
     /**
      * Retrieve and put the consumption data into the database between two dates
@@ -38,7 +41,7 @@ public class NomicsService {
 
         Map<String, Double> prices = new HashMap<>();
 
-        WaitRequestResult waitRequestResult = new WaitRequestResult(requestFinished);
+        //WaitRequestResult waitRequestResult = new WaitRequestResult(requestFinished);
 
         RequestQueue requestQueue = Volley.newRequestQueue(ApplicationService.getAppContext());
 
@@ -49,10 +52,11 @@ public class NomicsService {
                             Double.valueOf(response.getJSONObject(i).getString("price")));
                 }
                 System.out.println("prices="+prices);
-                waitRequestResult.setHasHadResponseDelivered(true);
-                synchronized (requestFinished) {
-                    requestFinished.notifyAll();
+                setHasHadResponseDelivered(true);
+                synchronized (endAsset) {
+                    getObj().notifyAll();
                 }
+
             } catch (Exception e) {
                 Log.e("getPrices", "Error while retrieving measures : " + e);
             }
@@ -66,13 +70,34 @@ public class NomicsService {
                 DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
                 DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
 
-        Thread waitResult = new Thread(waitRequestResult);
-        waitResult.start();
+        hasHadResponseDelivered = false;
+
+        /*RequestLauncher requestLauncher = new RequestLauncher(request);
+        Thread requestLauncherThread = new Thread(requestLauncher);
+        requestLauncherThread.start();*/
 
         requestQueue.add(request);
 
+        synchronized (prices) {
+            while (!hasHadResponseDelivered) {
+                try {
+                    prices.wait();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
         return prices;
 
+    }
+
+    public static Object getObj() {
+        return obj;
+    }
+
+    public static void setHasHadResponseDelivered(boolean hasHadResponseDelivered) {
+        NomicsService.hasHadResponseDelivered = hasHadResponseDelivered;
     }
 
 }
