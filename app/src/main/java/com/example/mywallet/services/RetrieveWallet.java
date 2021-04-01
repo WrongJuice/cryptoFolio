@@ -1,4 +1,4 @@
-package com.example.mywallet;
+package com.example.mywallet.services;
 
 import android.os.AsyncTask;
 
@@ -7,6 +7,10 @@ import com.binance.api.client.BinanceApiRestClient;
 import com.binance.api.client.domain.account.AssetBalance;
 import com.binance.api.client.domain.general.SymbolInfo;
 import com.binance.api.client.domain.market.TickerStatistics;
+
+import java.util.ArrayList;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeoutException;
 
 public class RetrieveWallet extends AsyncTask<String, String, Double> {
 
@@ -26,8 +30,10 @@ public class RetrieveWallet extends AsyncTask<String, String, Double> {
         SymbolInfo symbolInfoUSDT = new SymbolInfo();
         SymbolInfo symbolInfoBTC = new SymbolInfo();
 
-        System.out.println("prices="+client.getAllPrices());
-        for (AssetBalance balance : client.getAccount().getBalances())
+        //System.out.println("prices="+client.getAllPrices());
+
+
+        for (AssetBalance balance : client.getAccount().getBalances()) {
             if (balance.getAsset().equals("USDT")) {
                 walletValue += Double.parseDouble(balance.getFree());
             } else if (Double.parseDouble(balance.getFree()) + Double.parseDouble(balance.getLocked()) > 0) {
@@ -47,6 +53,16 @@ public class RetrieveWallet extends AsyncTask<String, String, Double> {
                 }
 
             }
+        }
+
+        ArrayList<String> startAssets = new ArrayList<>();
+        for (AssetBalance balance : client.getAccount().getBalances()) {
+            if (Double.parseDouble(balance.getFree()) + Double.parseDouble(balance.getLocked()) > 0) {
+                startAssets.add(balance.getAsset());
+            }
+        }
+
+        System.out.println("pricesRequestResult"+NomicsService.getPrices(startAssets, "EUR"));
 
         walletValue /= Double.parseDouble(client.get24HrPriceStatistics(params[2] + "USDT").getLastPrice());
 

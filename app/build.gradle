@@ -12,13 +12,13 @@ android {
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
-
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        resValue "string", "nomic_api_key", NOMIC_API_KEY
     }
 
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
@@ -43,4 +43,8 @@ dependencies {
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+
+    /* Volley is for HTTP Request using JSON */
+    implementation 'com.mcxiaoke.volley:library:1.0.19'
+    //implementation 'com.android.volley:volley:1.2.0'
 }
