@@ -32,6 +32,13 @@ public class BinanceService {
 
         @Override
         public void run() {
+            Map<String, Double> balances = new HashMap<>();
+            for (AssetBalance balance : client.getAccount().getBalances()) {
+                if (Double.parseDouble(balance.getFree()) + Double.parseDouble(balance.getLocked()) > 0)
+                    balances.put(balance.getAsset(), Double.parseDouble(balance.getFree())
+                            + Double.parseDouble(balance.getLocked()));
+            }
+            updateUi.updateOriginalBalances(balances);
 
             Response.Listener<Map<String, Double>> responseListener = response -> {
                 double totalWallet = 0;
@@ -39,13 +46,6 @@ public class BinanceService {
                     totalWallet += balance.getValue();
                 updateUi.updateTotalWallet(totalWallet);
             };
-
-            Map<String, Double> balances = new HashMap<>();
-            for (AssetBalance balance : client.getAccount().getBalances()) {
-                if (Double.parseDouble(balance.getFree()) + Double.parseDouble(balance.getLocked()) > 0)
-                    balances.put(balance.getAsset(), Double.parseDouble(balance.getFree())
-                            + Double.parseDouble(balance.getLocked()));
-            }
 
             NomicsService.getPrices(balances, endAsset, responseListener);
         }

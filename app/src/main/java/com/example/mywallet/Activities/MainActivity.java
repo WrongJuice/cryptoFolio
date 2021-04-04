@@ -1,8 +1,10 @@
 package com.example.mywallet.Activities;
 
 import android.os.Bundle;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -10,6 +12,8 @@ import com.example.mywallet.R;
 import com.example.mywallet.services.ApplicationService;
 import com.example.mywallet.services.BinanceService;
 import com.example.mywallet.utils.UpdateUi;
+
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -22,16 +26,27 @@ public class MainActivity extends AppCompatActivity {
 
         Button connect = findViewById(R.id.connect);
 
+        Spinner currenceySelector = findViewById(R.id.currency_select);
+
+        ArrayList<String> currencies = new ArrayList<>();
+        currencies.add("EUR"); currencies.add("USD"); currencies.add("JPY"); currencies.add("GBP");
+        currencies.add("CHF"); currencies.add("CAD"); currencies.add("RUB");
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, currencies);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        currenceySelector.setAdapter(adapter);
+
         EditText publicKey = findViewById(R.id.public_key);
         EditText privateKey = findViewById(R.id.private_key);
 
         UpdateUi updateUi = new UpdateUi();
+        updateUi.setUnitTextView(findViewById(R.id.unit));
         updateUi.setTotalWallet(findViewById(R.id.wallet));
 
         connect.setOnClickListener(view -> {
             BinanceService.setKeys(publicKey.getText().toString(), privateKey.getText().toString());
             BinanceService binanceService = new BinanceService(updateUi);
-            binanceService.getBalance("EUR");
+            binanceService.getBalance(currencies.get(currenceySelector.getSelectedItemPosition()));
+            updateUi.setSelectedConvertCurrency(currencies.get(currenceySelector.getSelectedItemPosition()));
         });
 
         // api key : 0HJvpJwNLRN41SSQJIaCYpsZ4UUryR3h7XfolarHu4vCFykTPKsoNLY2IC6F0Q1e

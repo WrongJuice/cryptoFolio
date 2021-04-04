@@ -20,8 +20,8 @@ import java.util.Map;
 
 public class NomicsService {
 
-    private static final String NOMIC_URL = "https://api.nomics.com/v1/";
-    private static final String NOMIC_API_KEY = ApplicationService.getAppContext().getString(R.string.nomic_api_key);
+    private static final String NOMICS_URL = "https://api.nomics.com/v1/";
+    private static final String NOMICS_API_KEY = ApplicationService.getAppContext().getString(R.string.nomic_api_key);
 
     private static class CryptoCurrenciesConversionsRequest extends Request<Map<String, Double>> {
 
@@ -29,7 +29,7 @@ public class NomicsService {
         private final Map<String, Double> balances;
 
         public CryptoCurrenciesConversionsRequest(Map<String, Double> balances, String convertCurrencySymbol, Response.Listener<Map<String, Double>> responseListener) {
-            super(Request.Method.GET, NOMIC_URL + "currencies/ticker?key=" + NOMIC_API_KEY + "&format=json&convert="
+            super(Request.Method.GET, NOMICS_URL + "currencies/ticker?key=" + NOMICS_API_KEY + "&format=json&convert="
                     + convertCurrencySymbol + "&ids=" + balances.keySet().toString().substring(1, balances.keySet().toString().length() - 1)
                     + "&interval=none", error -> System.out.println("error"));
             this.balances = balances;
@@ -52,7 +52,7 @@ public class NomicsService {
                 }
                 return Response.success(prices, HttpHeaderParser.parseCacheHeaders(response));
             } catch (UnsupportedEncodingException | JSONException e) {
-                Log.e("getPrices", "Error while retrieving measures : " + e);
+                Log.e("getPrices", "Error while converting currencies : " + e);
                 e.printStackTrace();
                 return Response.error(new ParseError(e));
             }

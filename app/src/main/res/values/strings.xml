@@ -8,5 +8,11 @@
     <string name="appwidget_text">EXAMPLE</string>
     <string name="add_widget">Add widget</string>
     <string name="random_value">123 768.63</string>
-    <string name="dollar">$</string>
+    <string name="USD">$</string>
+    <string name="EUR">€</string>
+    <string name="RUB">₽</string>
+    <string name="JPY">¥</string>
+    <string name="GBP">£</string>
+    <string name="CHF">Fr</string>
+    <string name="CAD">$</string>
 </resources>

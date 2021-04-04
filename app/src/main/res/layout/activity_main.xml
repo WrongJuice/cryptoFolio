@@ -16,13 +16,22 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/public_key"
-            android:id="@+id/public_key"/>
+            android:id="@+id/public_key"
+            android:autofillHints="Enter a Binance api public key"
+            android:inputType="text" />
 
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/private_key"
-            android:id="@+id/private_key"/>
+            android:id="@+id/private_key"
+            android:autofillHints="Enter a Binance api private key"
+            android:inputType="textPassword" />
+
+        <Spinner
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/currency_select"/>
 
         <Button
             android:layout_width="match_parent"
@@ -41,17 +50,31 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
+            android:textSize="18sp"
             android:text="@string/wallet"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
+            android:textSize="18sp"
             android:text="@string/_0"
             android:id="@+id/wallet"/>
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:textSize="18sp"
+            android:text="@string/EUR"
+            android:id="@+id/unit"/>
+
     </LinearLayout>
 
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/balances"/>
 
 
 </LinearLayout>
