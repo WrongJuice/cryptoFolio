@@ -1,5 +1,6 @@
 package com.example.mywallet.Activities;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -24,6 +25,8 @@ public class MainActivity extends AppCompatActivity {
         ApplicationService.setAppContext(this);
         setContentView(R.layout.activity_main);
 
+        SharedPreferences pref = ApplicationService.getAppContext().getSharedPreferences("keys", 0); // 0 - for private mode
+
         Button connect = findViewById(R.id.connect);
 
         Spinner currenceySelector = findViewById(R.id.currency_select);
@@ -38,11 +41,16 @@ public class MainActivity extends AppCompatActivity {
         EditText publicKey = findViewById(R.id.public_key);
         EditText privateKey = findViewById(R.id.private_key);
 
+        publicKey.setText(pref.getString("publicBinance", ""));
+        privateKey.setText(pref.getString("privateBinance", ""));
+
         UpdateUi updateUi = new UpdateUi();
         updateUi.setUnitTextView(findViewById(R.id.unit));
         updateUi.setTotalWallet(findViewById(R.id.wallet));
 
         connect.setOnClickListener(view -> {
+            pref.edit().putString("publicBinance", publicKey.getText().toString())
+            .putString("privateBinance", privateKey.getText().toString()).apply();
             BinanceService.setKeys(publicKey.getText().toString(), privateKey.getText().toString());
             BinanceService binanceService = new BinanceService(updateUi);
             binanceService.getBalance(currencies.get(currenceySelector.getSelectedItemPosition()));

@@ -15,4 +15,16 @@
     <string name="GBP">£</string>
     <string name="CHF">Fr</string>
     <string name="CAD">$</string>
+    <string name="currency_name">Currency name</string>
+    <string name="currency_name_title">Currency name :</string>
+    <string name="currency_id_title">Currency id :</string>
+    <string name="currency_id">id</string>
+    <string name="currency_value_title">Value :</string>
+    <string name="currency_value">--</string>
+    <string name="current_balance_title">Current balance :</string>
+    <string name="current_balance">Balance :</string>
+    <string name="currency_balance">currency balance</string>
+    <string name="currency_balance_converted_title">Converted balance :</string>
+    <string name="currency_balance_converted">--</string>
+    <string name="unit">unit</string>
 </resources>

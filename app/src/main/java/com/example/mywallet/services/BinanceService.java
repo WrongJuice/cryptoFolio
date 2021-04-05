@@ -6,7 +6,9 @@ import com.binance.api.client.BinanceApiRestClient;
 import com.binance.api.client.domain.account.AssetBalance;
 import com.example.mywallet.utils.UpdateUi;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class BinanceService {
@@ -33,7 +35,14 @@ public class BinanceService {
         @Override
         public void run() {
             Map<String, Double> balances = new HashMap<>();
-            for (AssetBalance balance : client.getAccount().getBalances()) {
+            List<AssetBalance> assetBalances = new ArrayList<>();
+            try {
+                assetBalances = client.getAccount().getBalances();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            for (AssetBalance balance : assetBalances) {
                 if (Double.parseDouble(balance.getFree()) + Double.parseDouble(balance.getLocked()) > 0)
                     balances.put(balance.getAsset(), Double.parseDouble(balance.getFree())
                             + Double.parseDouble(balance.getLocked()));
