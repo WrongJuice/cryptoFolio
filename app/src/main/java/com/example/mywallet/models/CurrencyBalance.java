@@ -3,6 +3,8 @@ package com.example.mywallet.models;
 public class CurrencyBalance {
 
     private final String currencyId;
+    private final String convertUnit;
+    private final String currencyName;
     private Double currentPrice;
     private final Double currentBalance;
     private Double currentBalanceConverted;
@@ -23,9 +25,21 @@ public class CurrencyBalance {
         return currentBalanceConverted;
     }
 
-    public CurrencyBalance(String currencyId, Double currentBalance) {
+    public String getConvertUnit() {
+        return convertUnit;
+    }
+
+    public String getCurrencyName() {
+        return currencyName;
+    }
+
+    public CurrencyBalance(String currencyId, Double currentBalance, Double currentPrice, String convertUnit, String currencyName) {
         this.currencyId = currencyId;
         this.currentBalance = currentBalance;
+        this.convertUnit = convertUnit;
+        this.currencyName = currencyName;
+        this.currentPrice = currentPrice;
+        currentBalanceConverted = currentPrice * currentBalance;
     }
 
     public void setCurrentPrice(Double currentPrice) {

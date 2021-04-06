@@ -4,6 +4,7 @@ import com.android.volley.Response;
 import com.binance.api.client.BinanceApiClientFactory;
 import com.binance.api.client.BinanceApiRestClient;
 import com.binance.api.client.domain.account.AssetBalance;
+import com.example.mywallet.models.CurrencyBalance;
 import com.example.mywallet.utils.UpdateUi;
 
 import java.util.ArrayList;
@@ -57,6 +58,13 @@ public class BinanceService {
             };
 
             NomicsService.getPrices(balances, endAsset, responseListener);
+
+            Response.Listener<List<CurrencyBalance>> responseListenerCurrencyBalance = response -> {
+                updateUi.setBalancesList(response);
+                updateUi.getCurrencyBalanceAdapter().notifyDataSetChanged();
+            };
+
+            NomicsService.getCryptoInfos(balances, endAsset, responseListenerCurrencyBalance);
         }
     }
 

@@ -1,11 +1,16 @@
 package com.example.mywallet.utils;
 
-import android.widget.Spinner;
+import android.widget.Adapter;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.mywallet.R;
+import com.example.mywallet.adapters.CurrencyBalanceAdapter;
+import com.example.mywallet.models.CurrencyBalance;
+import com.example.mywallet.services.ApplicationService;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 public class UpdateUi {
@@ -13,6 +18,18 @@ public class UpdateUi {
     private TextView totalWallet;
     private TextView currencyUnit;
     private String selectedConvertCurrency;
+    private List<CurrencyBalance> balances;
+    private CurrencyBalanceAdapter currencyBalanceAdapter;
+
+    public void setUpCurrenciesBalanceView (ListView currenciesBalanceList) {
+        balances = new ArrayList<>();
+        currencyBalanceAdapter = new CurrencyBalanceAdapter(ApplicationService.getAppContext(), balances);
+        currenciesBalanceList.setAdapter(currencyBalanceAdapter);
+    }
+
+    public void setBalancesList(List<CurrencyBalance> balances) {
+        this.balances = balances;
+    }
 
     public void updateTotalWallet (double wallet) {
         totalWallet.setText(String.valueOf(wallet));
@@ -41,6 +58,14 @@ public class UpdateUi {
 
     public void setSelectedConvertCurrency (String selectedConvertCurrency) {
         this.selectedConvertCurrency = selectedConvertCurrency;
+    }
+
+    public List<CurrencyBalance> getBalancesList() {
+        return balances;
+    }
+
+    public CurrencyBalanceAdapter getCurrencyBalanceAdapter() {
+        return currencyBalanceAdapter;
     }
 
 }

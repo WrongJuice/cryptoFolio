@@ -47,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
         UpdateUi updateUi = new UpdateUi();
         updateUi.setUnitTextView(findViewById(R.id.unit));
         updateUi.setTotalWallet(findViewById(R.id.wallet));
+        updateUi.setUpCurrenciesBalanceView(findViewById(R.id.balances));
 
         connect.setOnClickListener(view -> {
             pref.edit().putString("publicBinance", publicKey.getText().toString())
