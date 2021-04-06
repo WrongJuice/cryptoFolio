@@ -1,4 +1,4 @@
-package com.example.mywallet.Widgets;
+package com.example.mywallet.widgets;
 
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;

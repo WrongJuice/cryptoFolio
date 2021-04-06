@@ -1,4 +1,4 @@
-package com.example.mywallet.Activities;
+package com.example.mywallet.activities;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
 
         ArrayList<String> currencies = new ArrayList<>();
         currencies.add("EUR"); currencies.add("USD"); currencies.add("JPY"); currencies.add("GBP");
-        currencies.add("CHF"); currencies.add("CAD"); currencies.add("RUB");
+        currencies.add("CHF"); currencies.add("CAD"); currencies.add("RUB"); currencies.add("BTC");
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, currencies);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         currenceySelector.setAdapter(adapter);

@@ -15,6 +15,7 @@
     <string name="GBP">£</string>
     <string name="CHF">Fr</string>
     <string name="CAD">$</string>
+    <string name="BTC">₿</string>
     <string name="currency_name">Currency name</string>
     <string name="currency_name_title">Currency name :</string>
     <string name="currency_id_title">Currency id :</string>

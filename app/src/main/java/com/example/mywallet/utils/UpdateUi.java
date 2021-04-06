@@ -24,6 +24,7 @@ public class UpdateUi {
             case "CHF" : currencyUnit.setText(totalWallet.getContext().getString(R.string.CHF)); break;
             case "CAD" : currencyUnit.setText(totalWallet.getContext().getString(R.string.CAD)); break;
             case "RUB" : currencyUnit.setText(totalWallet.getContext().getString(R.string.RUB)); break;
+            case "BTC" : currencyUnit.setText(totalWallet.getContext().getString(R.string.BTC)); break;
         }
     }
 

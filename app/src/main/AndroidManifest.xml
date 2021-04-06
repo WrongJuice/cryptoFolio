@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyWallet">
 
-        <receiver android:name=".Widgets.WalletBalanceWidget">
+        <receiver android:name=".widgets.WalletBalanceWidget">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>
@@ -22,7 +22,7 @@
                 android:resource="@xml/wallet_value_info" />
         </receiver>
 
-        <activity android:name=".Activities.MainActivity">
+        <activity android:name=".activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
