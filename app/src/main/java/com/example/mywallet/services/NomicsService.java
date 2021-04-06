@@ -144,6 +144,7 @@ public class NomicsService {
                 new CryptoInfoRequest(balances, endAsset, responseListener);
 
         RequestQueue requestQueue = Volley.newRequestQueue(ApplicationService.getAppContext());
+        requestQueue.add(cryptoInfoRequest);
 
     }
 

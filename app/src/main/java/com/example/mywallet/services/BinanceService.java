@@ -57,11 +57,14 @@ public class BinanceService {
                 updateUi.updateTotalWallet(totalWallet);
             };
 
-            NomicsService.getPrices(balances, endAsset, responseListener);
+            //NomicsService.getPrices(balances, endAsset, responseListener);
 
             Response.Listener<List<CurrencyBalance>> responseListenerCurrencyBalance = response -> {
                 updateUi.setBalancesList(response);
-                updateUi.getCurrencyBalanceAdapter().notifyDataSetChanged();
+                double totalWallet = 0;
+                for (CurrencyBalance balance : response)
+                    totalWallet += balance.getCurrentBalanceConverted();
+                updateUi.updateTotalWallet(totalWallet);
             };
 
             NomicsService.getCryptoInfos(balances, endAsset, responseListenerCurrencyBalance);

@@ -12,6 +12,7 @@ import androidx.annotation.Nullable;
 
 import com.example.mywallet.R;
 import com.example.mywallet.models.CurrencyBalance;
+import com.example.mywallet.utils.Currency;
 
 import java.util.List;
 
@@ -44,19 +45,20 @@ public class CurrencyBalanceAdapter extends ArrayAdapter<CurrencyBalance> {
         TextView currencyValue = convertView.findViewById(R.id.currency_value);
         TextView valueUnit = convertView.findViewById(R.id.value_unit);
         TextView currencyBalance = convertView.findViewById(R.id.currency_balance);
-        TextView currencyBaanceUnit = convertView.findViewById(R.id.balance_unit);
+        TextView currencyBalanceUnit = convertView.findViewById(R.id.currency_unit);
         TextView convertedBalance = convertView.findViewById(R.id.currency_balance_converted);
         TextView convertedBalanceUnit = convertView.findViewById(R.id.converted_balance_unit);
 
         currencyName.setText(currencyBalanceItem.getCurrencyName());
         currencyId.setText(currencyBalanceItem.getCurrencyId());
         currencyValue.setText(String.valueOf(currencyBalanceItem.getCurrentPrice()));
-        valueUnit.setText(currencyBalanceItem.getConvertUnit());
+        valueUnit.setText(Currency.valueOf(currencyBalanceItem.getConvertUnit()).getSymbol());
         currencyBalance.setText(String.valueOf(currencyBalanceItem.getCurrentBalance()));
-        currencyBaanceUnit.setText(currencyBalanceItem.getConvertUnit());
+        currencyBalanceUnit.setText(currencyBalanceItem.getCurrencyId());
         convertedBalance.setText(String.valueOf(currencyBalanceItem.getCurrentBalanceConverted()));
-        convertedBalanceUnit.setText(currencyBalanceItem.getConvertUnit());
+        convertedBalanceUnit.setText(Currency.valueOf(currencyBalanceItem.getConvertUnit()).getSymbol());
 
         return convertView;
     }
+
 }

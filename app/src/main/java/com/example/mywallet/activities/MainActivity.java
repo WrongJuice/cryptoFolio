@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.mywallet.R;
 import com.example.mywallet.services.ApplicationService;
 import com.example.mywallet.services.BinanceService;
+import com.example.mywallet.utils.Currency;
 import com.example.mywallet.utils.UpdateUi;
 
 import java.util.ArrayList;

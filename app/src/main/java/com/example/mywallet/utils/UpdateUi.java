@@ -17,32 +17,25 @@ public class UpdateUi {
 
     private TextView totalWallet;
     private TextView currencyUnit;
+    private ListView balancesListView;
     private String selectedConvertCurrency;
     private List<CurrencyBalance> balances;
     private CurrencyBalanceAdapter currencyBalanceAdapter;
 
     public void setUpCurrenciesBalanceView (ListView currenciesBalanceList) {
-        balances = new ArrayList<>();
-        currencyBalanceAdapter = new CurrencyBalanceAdapter(ApplicationService.getAppContext(), balances);
-        currenciesBalanceList.setAdapter(currencyBalanceAdapter);
+        balancesListView = currenciesBalanceList;
     }
 
     public void setBalancesList(List<CurrencyBalance> balances) {
         this.balances = balances;
+        currencyBalanceAdapter = new CurrencyBalanceAdapter(ApplicationService.getAppContext(), balances);
+        balancesListView.setAdapter(currencyBalanceAdapter);
+        currencyBalanceAdapter.notifyDataSetChanged();
     }
 
     public void updateTotalWallet (double wallet) {
         totalWallet.setText(String.valueOf(wallet));
-        switch (selectedConvertCurrency) {
-            case "EUR" : currencyUnit.setText(totalWallet.getContext().getString(R.string.EUR)); break;
-            case "USD" : currencyUnit.setText(totalWallet.getContext().getString(R.string.USD)); break;
-            case "JPY" : currencyUnit.setText(totalWallet.getContext().getString(R.string.JPY)); break;
-            case "GBP" : currencyUnit.setText(totalWallet.getContext().getString(R.string.GBP)); break;
-            case "CHF" : currencyUnit.setText(totalWallet.getContext().getString(R.string.CHF)); break;
-            case "CAD" : currencyUnit.setText(totalWallet.getContext().getString(R.string.CAD)); break;
-            case "RUB" : currencyUnit.setText(totalWallet.getContext().getString(R.string.RUB)); break;
-            case "BTC" : currencyUnit.setText(totalWallet.getContext().getString(R.string.BTC)); break;
-        }
+        currencyUnit.setText(Currency.valueOf(selectedConvertCurrency).getSymbol());
     }
 
     public void setTotalWallet(TextView totalWallet) {

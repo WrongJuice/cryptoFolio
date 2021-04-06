@@ -28,4 +28,5 @@
     <string name="currency_balance_converted_title">Converted balance :</string>
     <string name="currency_balance_converted">--</string>
     <string name="unit">unit</string>
+    <string name="currency_unit">cUnit</string>
 </resources>
