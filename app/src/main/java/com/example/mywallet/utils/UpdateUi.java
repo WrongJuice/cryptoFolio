@@ -1,22 +1,22 @@
 package com.example.mywallet.utils;
 
-import android.widget.Adapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.example.mywallet.R;
 import com.example.mywallet.adapters.CurrencyBalanceAdapter;
 import com.example.mywallet.models.CurrencyBalance;
 import com.example.mywallet.services.ApplicationService;
 
-import java.util.ArrayList;
+import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 public class UpdateUi {
 
     private TextView totalWallet;
     private TextView currencyUnit;
+    private TextView updatedHour;
     private ListView balancesListView;
     private String selectedConvertCurrency;
     private List<CurrencyBalance> balances;
@@ -36,6 +36,7 @@ public class UpdateUi {
     public void updateTotalWallet (double wallet) {
         totalWallet.setText(String.valueOf(wallet));
         currencyUnit.setText(Currency.valueOf(selectedConvertCurrency).getSymbol());
+        updatedHour.setText(new SimpleDateFormat("HH:mm:ss", Locale.getDefault()).format(System.currentTimeMillis()));
     }
 
     public void setTotalWallet(TextView totalWallet) {
@@ -60,5 +61,10 @@ public class UpdateUi {
     public CurrencyBalanceAdapter getCurrencyBalanceAdapter() {
         return currencyBalanceAdapter;
     }
+
+    public void setUpdatedHour(TextView updatedHour) {
+        this.updatedHour = updatedHour;
+    }
+
 
 }

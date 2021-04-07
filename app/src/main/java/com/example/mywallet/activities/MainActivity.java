@@ -1,14 +1,12 @@
 package com.example.mywallet.activities;
 
 import android.content.SharedPreferences;
-import android.content.res.Configuration;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.mywallet.R;
@@ -18,6 +16,7 @@ import com.example.mywallet.utils.Currency;
 import com.example.mywallet.utils.UpdateUi;
 
 import java.util.ArrayList;
+import java.util.concurrent.TimeUnit;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -50,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
         updateUi.setUnitTextView(findViewById(R.id.unit));
         updateUi.setTotalWallet(findViewById(R.id.wallet));
         updateUi.setUpCurrenciesBalanceView(findViewById(R.id.balances));
+        updateUi.setUpdatedHour(findViewById(R.id.updated_hour));
 
         connect.setOnClickListener(view -> {
             pref.edit().putString("publicBinance", publicKey.getText().toString())
@@ -58,22 +58,24 @@ public class MainActivity extends AppCompatActivity {
             BinanceService binanceService = new BinanceService(updateUi);
             binanceService.getBalance(currencies.get(currenceySelector.getSelectedItemPosition()));
             updateUi.setSelectedConvertCurrency(currencies.get(currenceySelector.getSelectedItemPosition()));
+            if (ApplicationService.getRefreshThread() != null) ApplicationService.getRefreshThread().interrupt();
+            Runnable task = () -> {
+                while (true) {
+                    try {
+                        TimeUnit.SECONDS.sleep(35);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    binanceService.getBalance(currencies.get(currenceySelector.getSelectedItemPosition()));
+                    updateUi.setSelectedConvertCurrency(currencies.get(currenceySelector.getSelectedItemPosition()));
+                }
+            };
+            ApplicationService.setRefreshThread(new Thread(task));
+            ApplicationService.getRefreshThread().start();
         });
 
         // api key : 0HJvpJwNLRN41SSQJIaCYpsZ4UUryR3h7XfolarHu4vCFykTPKsoNLY2IC6F0Q1e
         // api secretkey : DqvVFLcFh4ltUd4MN7WNQdoMTrEjzovQVjeqS0MyVGb4vasOQP7IMdlH2KP80RK5
-    }
-
-    @Override
-    public void onConfigurationChanged(@NonNull Configuration newConfig) {
-        super.onConfigurationChanged(newConfig);
-
-        if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
-            setContentView(R.layout.activity_main);
-
-        } else {
-            setContentView(R.layout.activity_main);
-        }
     }
 
 }

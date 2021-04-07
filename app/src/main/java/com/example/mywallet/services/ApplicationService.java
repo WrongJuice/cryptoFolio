@@ -8,6 +8,15 @@ public class ApplicationService extends Application {
     /* *** General variables *** */
     private static ApplicationService applicationServiceInstance;
     private static Context appContext;
+    private static Thread refreshThread;
+
+    public static Thread getRefreshThread() {
+        return refreshThread;
+    }
+
+    public static void setRefreshThread(Thread refreshThread) {
+        ApplicationService.refreshThread = refreshThread;
+    }
 
     @Override
     public void onCreate() {

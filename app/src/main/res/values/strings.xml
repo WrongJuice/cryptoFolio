@@ -29,4 +29,6 @@
     <string name="currency_balance_converted">--</string>
     <string name="unit">unit</string>
     <string name="currency_unit">cUnit</string>
+    <string name="updated_title">Mis à jour :</string>
+    <string name="updated_hour">-- : --</string>
 </resources>
