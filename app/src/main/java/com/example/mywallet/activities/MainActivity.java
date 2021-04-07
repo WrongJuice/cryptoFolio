@@ -1,12 +1,14 @@
 package com.example.mywallet.activities;
 
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.mywallet.R;
@@ -33,8 +35,7 @@ public class MainActivity extends AppCompatActivity {
         Spinner currenceySelector = findViewById(R.id.currency_select);
 
         ArrayList<String> currencies = new ArrayList<>();
-        currencies.add("EUR"); currencies.add("USD"); currencies.add("JPY"); currencies.add("GBP");
-        currencies.add("CHF"); currencies.add("CAD"); currencies.add("RUB"); currencies.add("BTC");
+        for (Currency currency : Currency.values()) currencies.add(currency.name());
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, currencies);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         currenceySelector.setAdapter(adapter);
@@ -61,6 +62,18 @@ public class MainActivity extends AppCompatActivity {
 
         // api key : 0HJvpJwNLRN41SSQJIaCYpsZ4UUryR3h7XfolarHu4vCFykTPKsoNLY2IC6F0Q1e
         // api secretkey : DqvVFLcFh4ltUd4MN7WNQdoMTrEjzovQVjeqS0MyVGb4vasOQP7IMdlH2KP80RK5
+    }
+
+    @Override
+    public void onConfigurationChanged(@NonNull Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+
+        if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            setContentView(R.layout.activity_main);
+
+        } else {
+            setContentView(R.layout.activity_main);
+        }
     }
 
 }
