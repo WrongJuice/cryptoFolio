@@ -18,17 +18,21 @@ public class UpdateUi {
     private TextView currencyUnit;
     private TextView updatedHour;
     private ListView balancesListView;
-    private String selectedConvertCurrency;
-    private List<CurrencyBalance> balances;
-    private CurrencyBalanceAdapter currencyBalanceAdapter;
+
+    private static String selectedConvertCurrency;
+    private static List<CurrencyBalance> balances;
+
+    public static List<CurrencyBalance> getBalances() {
+        return balances;
+    }
 
     public void setUpCurrenciesBalanceView (ListView currenciesBalanceList) {
         balancesListView = currenciesBalanceList;
     }
 
     public void setBalancesList(List<CurrencyBalance> balances) {
-        this.balances = balances;
-        currencyBalanceAdapter = new CurrencyBalanceAdapter(ApplicationService.getAppContext(), balances);
+        UpdateUi.balances = balances;
+        CurrencyBalanceAdapter currencyBalanceAdapter = new CurrencyBalanceAdapter(ApplicationService.getAppContext(), balances);
         balancesListView.setAdapter(currencyBalanceAdapter);
         currencyBalanceAdapter.notifyDataSetChanged();
     }
@@ -43,28 +47,20 @@ public class UpdateUi {
         this.totalWallet = totalWallet;
     }
 
-    public void updateOriginalBalances(Map<String, Double> balances) {
-    }
-
     public void setUnitTextView (TextView unit) {
         currencyUnit = unit;
     }
 
-    public void setSelectedConvertCurrency (String selectedConvertCurrency) {
-        this.selectedConvertCurrency = selectedConvertCurrency;
-    }
-
-    public List<CurrencyBalance> getBalancesList() {
-        return balances;
-    }
-
-    public CurrencyBalanceAdapter getCurrencyBalanceAdapter() {
-        return currencyBalanceAdapter;
+    public static void setSelectedConvertCurrency(String selectedConvertCurrency) {
+        UpdateUi.selectedConvertCurrency = selectedConvertCurrency;
     }
 
     public void setUpdatedHour(TextView updatedHour) {
         this.updatedHour = updatedHour;
     }
 
+    public static String getSelectedConvertCurrency() {
+        return selectedConvertCurrency;
+    }
 
 }

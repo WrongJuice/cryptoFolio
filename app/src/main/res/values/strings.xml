@@ -7,7 +7,7 @@
     <string name="_0">0</string>
     <string name="appwidget_text">Wallet</string>
     <string name="add_widget">Add widget</string>
-    <string name="random_value">123 768.63</string>
+    <string name="random_value">0.00</string>
     <string name="USD">$</string>
     <string name="EUR">€</string>
     <string name="RUB">₽</string>
@@ -29,6 +29,6 @@
     <string name="currency_balance_converted">--</string>
     <string name="unit">unit</string>
     <string name="currency_unit">cUnit</string>
-    <string name="updated_title">Mis à jour :</string>
+    <string name="updated_title">Last update :</string>
     <string name="updated_hour">-- : --</string>
 </resources>

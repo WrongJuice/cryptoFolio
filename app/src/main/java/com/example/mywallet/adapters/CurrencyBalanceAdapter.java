@@ -19,8 +19,8 @@ import java.util.List;
 
 public class CurrencyBalanceAdapter extends ArrayAdapter<CurrencyBalance> {
 
-    private List<CurrencyBalance> balances;
-    private List<View> views;
+    private final List<CurrencyBalance> balances;
+    private final List<View> views;
     private ViewGroup parent;
 
     public CurrencyBalanceAdapter(@NonNull Context context, @NonNull List<CurrencyBalance> balances) {

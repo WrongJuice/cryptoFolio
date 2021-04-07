@@ -48,7 +48,7 @@ public class BinanceService {
                     balances.put(balance.getAsset(), Double.parseDouble(balance.getFree())
                             + Double.parseDouble(balance.getLocked()));
             }
-            updateUi.updateOriginalBalances(balances);
+            // updateUi.updateOriginalBalances(balances);
 
             Response.Listener<Map<String, Double>> responseListener = response -> {
                 double totalWallet = 0;
@@ -57,7 +57,7 @@ public class BinanceService {
                 updateUi.updateTotalWallet(totalWallet);
             };
 
-            //NomicsService.getPrices(balances, endAsset, responseListener);
+            // NomicsService.getPrices(balances, endAsset, responseListener);
 
             Response.Listener<List<CurrencyBalance>> responseListenerCurrencyBalance = response -> {
                 updateUi.setBalancesList(response);

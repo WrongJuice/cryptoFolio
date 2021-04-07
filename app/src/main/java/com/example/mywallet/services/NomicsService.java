@@ -25,7 +25,7 @@ public class NomicsService {
 
     private static final String NOMICS_URL = "https://api.nomics.com/v1/";
     private static final String NOMICS_API_KEY = ApplicationService.getAppContext().getString(R.string.nomic_api_key);
-    private static List<String> urlCache = new ArrayList<>();
+    private static final List<String> urlCache = new ArrayList<>();
 
     private static class CryptoCurrenciesConversionsRequest extends Request<Map<String, Double>> {
 

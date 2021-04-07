@@ -1,5 +1,9 @@
 package com.example.mywallet.activities;
 
+import android.app.PendingIntent;
+import android.appwidget.AppWidgetManager;
+import android.content.ComponentName;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
@@ -14,6 +18,7 @@ import com.example.mywallet.services.ApplicationService;
 import com.example.mywallet.services.BinanceService;
 import com.example.mywallet.utils.Currency;
 import com.example.mywallet.utils.UpdateUi;
+import com.example.mywallet.widgets.WalletBalanceWidget;
 
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
@@ -57,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
             BinanceService.setKeys(publicKey.getText().toString(), privateKey.getText().toString());
             BinanceService binanceService = new BinanceService(updateUi);
             binanceService.getBalance(currencies.get(currenceySelector.getSelectedItemPosition()));
-            updateUi.setSelectedConvertCurrency(currencies.get(currenceySelector.getSelectedItemPosition()));
+            UpdateUi.setSelectedConvertCurrency(currencies.get(currenceySelector.getSelectedItemPosition()));
             if (ApplicationService.getRefreshThread() != null) ApplicationService.getRefreshThread().interrupt();
             Runnable task = () -> {
                 while (true) {
@@ -67,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
                         e.printStackTrace();
                     }
                     binanceService.getBalance(currencies.get(currenceySelector.getSelectedItemPosition()));
-                    updateUi.setSelectedConvertCurrency(currencies.get(currenceySelector.getSelectedItemPosition()));
+                    UpdateUi.setSelectedConvertCurrency(currencies.get(currenceySelector.getSelectedItemPosition()));
                 }
             };
             ApplicationService.setRefreshThread(new Thread(task));
