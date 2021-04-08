@@ -21,6 +21,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * The type Nomics service.
+ */
 public class NomicsService {
 
     private static final String NOMICS_URL = "https://api.nomics.com/v1/";
@@ -32,6 +35,13 @@ public class NomicsService {
         private final Response.Listener<Map<String, Double>> listener;
         private final Map<String, Double> balances;
 
+        /**
+         * Instantiates a new Crypto currencies conversions request.
+         *
+         * @param balances              the balances
+         * @param convertCurrencySymbol the convert currency symbol
+         * @param responseListener      the response listener
+         */
         public CryptoCurrenciesConversionsRequest(Map<String, Double> balances, String convertCurrencySymbol, Response.Listener<Map<String, Double>> responseListener) {
             super(Request.Method.GET, NOMICS_URL + "currencies/ticker?key=" + NOMICS_API_KEY + "&format=json&convert="
                     + convertCurrencySymbol + "&ids=" + balances.keySet().toString().substring(1, balances.keySet().toString().length() - 1)
@@ -76,6 +86,13 @@ public class NomicsService {
         private final Map<String, Double> balances;
         private final String convertCurrencySymbol;
 
+        /**
+         * Instantiates a new Crypto info request.
+         *
+         * @param balances              the balances
+         * @param convertCurrencySymbol the convert currency symbol
+         * @param responseListener      the response listener
+         */
         public CryptoInfoRequest(Map<String, Double> balances, String convertCurrencySymbol, Response.Listener<List<CurrencyBalance>> responseListener) {
             super(Request.Method.GET, NOMICS_URL + "currencies/ticker?key=" + NOMICS_API_KEY + "&format=json&convert="
                     + convertCurrencySymbol + "&ids=" + balances.keySet().toString().substring(1, balances.keySet().toString().length() - 1)
@@ -123,8 +140,10 @@ public class NomicsService {
 
     /**
      * Retrieve and put the consumption data into the database between two dates
-     * @param balances The balances you need to know the price of
-     * @param endAsset The asset into which you want to convert your input assets
+     *
+     * @param balances         The balances you need to know the price of
+     * @param endAsset         The asset into which you want to convert your input assets
+     * @param responseListener the response listener
      */
     public static void getPrices(Map<String, Double> balances , String endAsset,
                                                 Response.Listener<Map<String, Double>> responseListener) {
@@ -137,6 +156,13 @@ public class NomicsService {
 
     }
 
+    /**
+     * Gets crypto infos.
+     *
+     * @param balances         the balances
+     * @param endAsset         the end asset
+     * @param responseListener the response listener
+     */
     public static void getCryptoInfos(Map<String, Double> balances , String endAsset,
                                       Response.Listener<List<CurrencyBalance>> responseListener) {
 

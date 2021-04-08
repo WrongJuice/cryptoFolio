@@ -14,18 +14,50 @@ import com.example.mywallet.widgets.WalletBalancesWidget;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The type Widget adapter.
+ */
 public class WidgetAdapter extends RemoteViewsService {
 
+    /**
+     * The type Widget item.
+     */
     public static final class WidgetItem {
 
-        /** Label to display in the list. */
+        /**
+         * Label to display in the list.
+         */
         public String currencyName;
+        /**
+         * The Id.
+         */
         public String id;
+        /**
+         * The Convert unit.
+         */
         public String convertUnit;
+        /**
+         * The Value.
+         */
         public double value;
+        /**
+         * The Currency balance.
+         */
         public double currencyBalance;
+        /**
+         * The Converted balance.
+         */
         public double convertedBalance;
 
+        /**
+         * Instantiates a new Widget item.
+         *
+         * @param currencyName    the currency name
+         * @param id              the id
+         * @param convertUnit     the convert unit
+         * @param value           the value
+         * @param currencyBalance the currency balance
+         */
         public WidgetItem(String currencyName, String id, String convertUnit, double value, double currencyBalance) {
             this.currencyName = currencyName;
             this.id = id;
@@ -42,10 +74,18 @@ public class WidgetAdapter extends RemoteViewsService {
         return new ListRemoteViewsFactory(getApplicationContext());
     }
 
+    /**
+     * The type List remote views factory.
+     */
     public static class ListRemoteViewsFactory implements RemoteViewsService.RemoteViewsFactory {
         private final List<WidgetItem> mWidgetItems = new ArrayList<>();
         private final Context mContext;
 
+        /**
+         * Instantiates a new List remote views factory.
+         *
+         * @param context the context
+         */
         public ListRemoteViewsFactory(Context context) {
             mContext = context;
         }

@@ -12,15 +12,29 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * The type Binance service.
+ */
 public class BinanceService {
 
     private final UpdateUi updateUi;
     private static BinanceApiRestClient client;
 
+    /**
+     * Instantiates a new Binance service.
+     *
+     * @param updateUi the update ui
+     */
     public BinanceService (UpdateUi updateUi) {
         this.updateUi = updateUi;
     }
 
+    /**
+     * Sets keys.
+     *
+     * @param publicKey  the public key
+     * @param privateKey the private key
+     */
     public static void setKeys (String publicKey, String privateKey) {
         client = BinanceApiClientFactory.newInstance(publicKey, privateKey).newRestClient();
     }
@@ -29,6 +43,11 @@ public class BinanceService {
 
         private final String endAsset;
 
+        /**
+         * Instantiates a new Get balance.
+         *
+         * @param endAsset the end asset
+         */
         public GetBalance (String endAsset) {
             this.endAsset = endAsset;
         }
@@ -71,6 +90,11 @@ public class BinanceService {
         }
     }
 
+    /**
+     * Gets balance.
+     *
+     * @param endAsset the end asset
+     */
     public void getBalance (String endAsset) {
         GetBalance getBalance = new GetBalance(endAsset);
         Thread getBalanceThread = new Thread(getBalance);

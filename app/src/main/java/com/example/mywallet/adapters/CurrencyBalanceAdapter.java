@@ -17,12 +17,21 @@ import com.example.mywallet.utils.Currency;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The type Currency balance adapter.
+ */
 public class CurrencyBalanceAdapter extends ArrayAdapter<CurrencyBalance> {
 
     private final List<CurrencyBalance> balances;
     private final List<View> views;
     private ViewGroup parent;
 
+    /**
+     * Instantiates a new Currency balance adapter.
+     *
+     * @param context  the context
+     * @param balances the balances
+     */
     public CurrencyBalanceAdapter(@NonNull Context context, @NonNull List<CurrencyBalance> balances) {
         super(context, 0, balances);
         views = new ArrayList<>();

@@ -18,6 +18,9 @@ import com.example.mywallet.utils.UpdateUi;
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
+/**
+ * The type Main activity.
+ */
 public class MainActivity extends AppCompatActivity {
 
     @Override

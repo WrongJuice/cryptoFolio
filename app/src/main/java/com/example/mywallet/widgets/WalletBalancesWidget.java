@@ -28,10 +28,23 @@ public class WalletBalancesWidget extends AppWidgetProvider {
 
     private static final String LIST_ITEM_CLICKED_ACTION = "LIST_ITEM_CLICKED_ACTION";
     private static final String REFRESH_WIDGET_ACTION = "REFRESH_WIDGET_ACTION";
+    /**
+     * The constant EXTRA_CLICKED_FILE.
+     */
     public static final String EXTRA_CLICKED_FILE = "EXTRA_CLICKED_FILE";
 
+    /**
+     * The constant ACTION_WIDGET_UPDATE.
+     */
     public static final String ACTION_WIDGET_UPDATE = "android.appwidget.action.APPWIDGET_UPDATE";
 
+    /**
+     * Update app widget.
+     *
+     * @param context          the context
+     * @param appWidgetManager the app widget manager
+     * @param appWidgetId      the app widget id
+     */
     static void updateAppWidget(Context context, AppWidgetManager appWidgetManager,
                                 int appWidgetId) {
 
