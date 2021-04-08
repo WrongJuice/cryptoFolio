@@ -19,6 +19,7 @@
             android:orientation="horizontal"
             android:padding="6dp" >
 
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -49,11 +50,37 @@
 
         </LinearLayout>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#FF000000"
+            android:orientation="horizontal"
+            android:layout_below="@id/top_row"
+            android:paddingBottom="5dp"
+            android:id="@+id/top_row2">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="6dp"
+                android:textColor="@android:color/primary_text_dark"
+                android:text="@string/last_update_title"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/primary_text_dark"
+                android:layout_marginStart="5dp"
+                android:text="@string/last_update"
+                android:id="@+id/last_update_title"/>
+
+        </LinearLayout>
+
         <ListView
             android:id="@+id/widget_list"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@id/top_row"
+            android:layout_below="@id/top_row2"
             android:background="@android:color/background_light"
             android:divider="@android:color/darker_gray"
             android:dividerHeight="1px" >
@@ -65,7 +92,7 @@
             android:id="@+id/empty_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@id/top_row"
+            android:layout_below="@id/top_row2"
             android:background="@android:color/white"
             android:padding="6dp"
             android:text="no balances"

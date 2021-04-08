@@ -13,7 +13,7 @@
         android:theme="@style/Theme.MyWallet">
 
         <service
-            android:name=".services.WidgetService"
+            android:name=".adapters.WidgetAdapter"
             android:exported="false"
             android:permission="android.permission.BIND_REMOTEVIEWS" />
 
@@ -28,24 +28,6 @@
             <meta-data
                 android:name="android.appwidget.provider"
                 android:resource="@xml/wallet_balances_widget_info" />
-        </receiver>
-
-        <receiver android:name=".widgets.WalletBalanceWidget">
-            <intent-filter>
-                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
-                <action android:name="android.appwidget.action.APPWIDGET_ENABLED" />
-                <action android:name="android.appwidget.action.APPWIDGET_DISABLED" />
-            </intent-filter>
-            <intent-filter>
-                <action android:name="ACTION_AUTO_UPDATE" />
-            </intent-filter>
-            <intent-filter>
-                <action android:name="AUTO_UPDATE" />
-            </intent-filter>
-
-            <meta-data
-                android:name="android.appwidget.provider"
-                android:resource="@xml/wallet_value_info" />
         </receiver>
 
         <activity

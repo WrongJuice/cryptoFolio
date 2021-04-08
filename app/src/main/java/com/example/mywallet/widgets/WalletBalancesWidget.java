@@ -13,11 +13,13 @@ import android.widget.Toast;
 
 import com.example.mywallet.R;
 import com.example.mywallet.models.CurrencyBalance;
-import com.example.mywallet.services.WidgetService;
+import com.example.mywallet.adapters.WidgetAdapter;
 import com.example.mywallet.utils.Currency;
 import com.example.mywallet.utils.UpdateUi;
 
 import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
+import java.util.Locale;
 
 /**
  * Implementation of App Widget functionality.
@@ -36,7 +38,7 @@ public class WalletBalancesWidget extends AppWidgetProvider {
         CharSequence widgetText = context.getString(R.string.appwidget_text);
         // Construct the RemoteViews object
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.wallet_balances_widget);
-        views.setTextViewText(R.id.appwidget_text, widgetText);
+        // views.setTextViewText(R.id.appwidget_text, widgetText);
 
         // Instruct the widget manager to update the widget
         appWidgetManager.updateAppWidget(appWidgetId, views);
@@ -59,9 +61,10 @@ public class WalletBalancesWidget extends AppWidgetProvider {
 
             rv.setTextViewText(R.id.total_wallet, new DecimalFormat("#.##").format(totalBalance));
             rv.setTextViewText(R.id.unit_total_wallet, Currency.valueOf(UpdateUi.getSelectedConvertCurrency()).getSymbol());
+            rv.setTextViewText(R.id.last_update_title, new SimpleDateFormat("HH:mm:ss", Locale.getDefault()).format(System.currentTimeMillis()));
 
             // Setup intent which points to the WidgetService which will provide the views for this collection.
-            Intent intent = new Intent(context, WidgetService.class);
+            Intent intent = new Intent(context, WidgetAdapter.class);
             intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);
             // When intents are compared, the extras are ignored, so we need to embed the extras
             // into the data so that the extras will not be ignored.
@@ -98,7 +101,7 @@ public class WalletBalancesWidget extends AppWidgetProvider {
         switch (intent.getAction()) {
             case LIST_ITEM_CLICKED_ACTION:
                 String clickedFilePath = intent.getStringExtra(EXTRA_CLICKED_FILE);
-                Toast toast = Toast.makeText(context, "LIST_ITEM_CLICKED_ACTION: " + clickedFilePath, Toast.LENGTH_SHORT);
+                Toast toast = Toast.makeText(context, "Currency click : " + clickedFilePath, Toast.LENGTH_SHORT);
                 toast.setGravity(Gravity.CENTER, 0, 0);
                 toast.show();
                 break;
@@ -114,7 +117,8 @@ public class WalletBalancesWidget extends AppWidgetProvider {
                 RemoteViews rv = new RemoteViews(context.getPackageName(), R.layout.wallet_balances_widget);
 
                 rv.setTextViewText(R.id.total_wallet, new DecimalFormat("#.##").format(totalBalance));
-                rv.setTextViewText(R.id.unit_total_wallet, Currency.valueOf(UpdateUi.getSelectedConvertCurrency()).getSymbol());;
+                rv.setTextViewText(R.id.unit_total_wallet, Currency.valueOf(UpdateUi.getSelectedConvertCurrency()).getSymbol());
+                rv.setTextViewText(R.id.last_update_title, new SimpleDateFormat("HH:mm:ss", Locale.getDefault()).format(System.currentTimeMillis()));
 
                 ComponentName cn = new ComponentName(context, WalletBalancesWidget.class);
                 AppWidgetManager.getInstance(context).updateAppWidget(cn, rv);
@@ -125,7 +129,7 @@ public class WalletBalancesWidget extends AppWidgetProvider {
                 break;
             case ACTION_WIDGET_UPDATE:
                 AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
-                int appWidgetIds[] = appWidgetManager.getAppWidgetIds(new ComponentName(context, WalletBalancesWidget.class));
+                int[] appWidgetIds = appWidgetManager.getAppWidgetIds(new ComponentName(context, WalletBalancesWidget.class));
                 appWidgetManager.notifyAppWidgetViewDataChanged(appWidgetIds, R.id.widget_list);
                 break;
         }

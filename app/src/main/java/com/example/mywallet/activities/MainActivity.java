@@ -1,9 +1,5 @@
 package com.example.mywallet.activities;
 
-import android.app.PendingIntent;
-import android.appwidget.AppWidgetManager;
-import android.content.ComponentName;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
@@ -18,7 +14,6 @@ import com.example.mywallet.services.ApplicationService;
 import com.example.mywallet.services.BinanceService;
 import com.example.mywallet.utils.Currency;
 import com.example.mywallet.utils.UpdateUi;
-import com.example.mywallet.widgets.WalletBalanceWidget;
 
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;

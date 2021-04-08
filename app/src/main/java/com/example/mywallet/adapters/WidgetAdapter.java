@@ -1,4 +1,4 @@
-package com.example.mywallet.services;
+package com.example.mywallet.adapters;
 
 import android.content.Context;
 import android.content.Intent;
@@ -14,7 +14,7 @@ import com.example.mywallet.widgets.WalletBalancesWidget;
 import java.util.ArrayList;
 import java.util.List;
 
-public class WidgetService extends RemoteViewsService {
+public class WidgetAdapter extends RemoteViewsService {
 
     public static final class WidgetItem {
 
