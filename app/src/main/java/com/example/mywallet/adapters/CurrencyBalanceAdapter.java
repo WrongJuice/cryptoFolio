@@ -66,30 +66,4 @@ public class CurrencyBalanceAdapter extends ArrayAdapter<CurrencyBalance> {
         return convertView;
     }
 
-    public void updateViews() {
-        for (int i = 0 ; i != balances.size() ; i++) {
-            CurrencyBalance currencyBalanceItem = getItem(i);
-            // Check if an existing view is being reused, otherwise inflate the view
-            View convertView = getView(i, views.get(i), parent);
-
-            TextView currencyName = convertView.findViewById(R.id.currency_name);
-            TextView currencyId = convertView.findViewById(R.id.currency_id);
-            TextView currencyValue = convertView.findViewById(R.id.currency_value);
-            TextView valueUnit = convertView.findViewById(R.id.value_unit);
-            TextView currencyBalance = convertView.findViewById(R.id.currency_balance);
-            TextView currencyBalanceUnit = convertView.findViewById(R.id.currency_unit);
-            TextView convertedBalance = convertView.findViewById(R.id.currency_balance_converted);
-            TextView convertedBalanceUnit = convertView.findViewById(R.id.converted_balance_unit);
-
-            currencyName.setText(currencyBalanceItem.getCurrencyName());
-            currencyId.setText(currencyBalanceItem.getCurrencyId());
-            currencyValue.setText(String.valueOf(currencyBalanceItem.getCurrentPrice()));
-            valueUnit.setText(Currency.valueOf(currencyBalanceItem.getConvertUnit()).getSymbol());
-            currencyBalance.setText(String.valueOf(currencyBalanceItem.getCurrentBalance()));
-            currencyBalanceUnit.setText(currencyBalanceItem.getCurrencyId());
-            convertedBalance.setText(String.valueOf(currencyBalanceItem.getCurrentBalanceConverted()));
-            convertedBalanceUnit.setText(Currency.valueOf(currencyBalanceItem.getConvertUnit()).getSymbol());
-        }
-    }
-
 }

@@ -31,4 +31,6 @@
     <string name="currency_unit">cUnit</string>
     <string name="updated_title">Last update :</string>
     <string name="updated_hour">-- : --</string>
+    <string name="total_balance_title">Total balance :</string>
+    <string name="default_value_total_wallet">-.--</string>
 </resources>

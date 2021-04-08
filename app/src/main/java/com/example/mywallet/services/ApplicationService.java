@@ -3,8 +3,6 @@ package com.example.mywallet.services;
 import android.app.Application;
 import android.content.Context;
 
-import com.example.mywallet.utils.UpdateUi;
-
 import java.util.ArrayList;
 import java.util.List;
 

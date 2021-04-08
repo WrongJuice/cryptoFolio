@@ -18,7 +18,6 @@ public class UpdateUi {
     private TextView currencyUnit;
     private TextView updatedHour;
     private ListView balancesListView;
-
     private static String selectedConvertCurrency;
     private static List<CurrencyBalance> balances;
 
